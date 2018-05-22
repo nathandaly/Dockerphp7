@@ -1,0 +1,33 @@
+version: '3.1'
+
+services:
+    mysql:
+        image: mysql:latest
+        container_name: dev_db
+        ports:
+            - "3307:3306"
+        environment:
+            MYSQL_DATABASE: realworld
+            MYSQL_USER: phalcon
+            MYSQL_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: secret
+    php:
+        build: php-fpm
+        ports:
+            - '9002:9000'
+        container_name: dev_app
+        volumes:
+            - ../:/var/www/html:consistent
+            - ./logs/symfony:/var/www/html/var/logs:cached
+        links:
+            - mysql
+    nginx:
+        build: nginx
+        container_name: dev_web
+        ports:
+            - '8080:80'
+        volumes:
+            - ../:/var/www/html:consistent
+            - ./logs/nginx/:/var/log/nginx:cached
+        links:
+            - php
