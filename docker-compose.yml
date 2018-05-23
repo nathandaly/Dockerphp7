@@ -17,7 +17,7 @@ services:
             - ../:/var/www/html:consistent
             - ./logs/symfony:/var/www/html/var/logs:cached
         environment:
-            XDEBUG_CONFIG: "remote_host=${YOUR_IP_ADDRESS}"
+            XDEBUG_CONFIG: remote_host=192.168.1.126
         env_file:
             - build/.env
         links:
