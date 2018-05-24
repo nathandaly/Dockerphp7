@@ -9,14 +9,10 @@ RUN apt-get update -yqq && apt-get install -y zlib1g-dev libpq-dev libxml2-dev b
 
 # Install PECL extensions
 RUN pecl install mcrypt-1.0.1
-RUN pecl install xdebug
 
 # Install php extensions
 RUN docker-php-ext-install pdo_mysql pdo_sqlite opcache json \
     calendar bcmath bcmath xml zip bz2 curl intl
 
 # Enable PHP extensions
-RUN docker-php-ext-enable mcrypt xdebug
-
-# Configure XDebug
-COPY xdebug.ini /etc/php/7.2/apache2/conf.d/20-xdebug.ini
+RUN docker-php-ext-enable mcrypt

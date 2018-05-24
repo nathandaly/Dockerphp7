@@ -15,9 +15,6 @@ services:
     volumes:
       - ../:/var/www/html:consistent
       - ./logs/symfony:/var/www/html/var/logs:cached
-    environment:
-      XDEBUG_CONFIG: "remote_enable=1 remote_host={{HOST_IP}}"
-      PHP_IDE_CONFIG: "serverName={{SERVER_NAME}}"
     links:
       - mysql
   nginx:
